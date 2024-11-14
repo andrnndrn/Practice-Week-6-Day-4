@@ -1,5 +1,5 @@
-import React from "react";
-import instagramIcon from "../assets/AssetFooterPages/instagram-icon.png";  
+import React, { useState } from "react";
+import instagramIcon from "../assets/AssetFooterPages/instagram-icon.png";
 import facebookIcon from "../assets/AssetFooterPages/facebook-icon.png";
 import twitterIcon from "../assets/AssetFooterPages/twitter-icon.png";
 import linkedinIcon from "../assets/AssetFooterPages/linkedin-icon.png";
@@ -7,15 +7,35 @@ import reactIcon from "../assets/react-icon.png";
 import wordpressIcon from "../assets/wordpress-icon.png";
 import wixIcon from "../assets/wix-icon.png";
 import { useNavigate } from "react-router-dom";
+import DOMPurify from "dompurify";
 
 const Footer = () => {
-    const navigate = useNavigate();
-  
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    email: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    const sanitizedValue = DOMPurify.sanitize(value);
+
+    setFormData((prevInput) => ({
+      ...prevInput,
+      [name]: sanitizedValue,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+  };
+
   // Function to handle navigation
-    const handleNavigation = (path) => {
-      navigate(path);
-      window.scrollTo(0, 0);
-    };
+  const handleNavigation = (path) => {
+    navigate(path);
+    window.scrollTo(0, 0);
+  };
 
   return (
     <footer className="bg-dark-blue-100 text-white py-10 md:py-16">
@@ -24,39 +44,45 @@ const Footer = () => {
           <h3 className="text-lg font-bold text-white">About Us</h3>
           <hr className="border-2 border-peach-red-100 w-10" />
           <p className="font-light text-sm pt-4">
-            It is a long established <br />
-            fact that a reader will be distracted by
+            It is a long established fact that a reader will be distracted by
             the readable content of a page when looking at
           </p>
           <div className="flex space-x-4 ">
-            <a href="www.linkedin.com" className="bg-white rounded-lg p-2 hover:bg-red-200" rel="noopener noreferrer">
-              <img
-                src={linkedinIcon}
-                alt="linkedin-icon"
-                className="w-5 h-5"
-                
-              />
+            <a
+              href="www.linkedin.com"
+              target="_blank"
+              className="bg-white rounded-lg p-2 hover:bg-red-200"
+              rel="noopener noreferrer"
+            >
+              <img src={linkedinIcon} alt="linkedin-icon" className="w-5 h-5" />
             </a>
-            <a href="www.instagram.com" className="bg-white rounded-lg p-2 hover:bg-red-200" rel="noopener noreferrer">
+            <a
+              href="www.instagram.com"
+              target="_blank"
+              className="bg-white rounded-lg p-2 hover:bg-red-200"
+              rel="noopener noreferrer"
+            >
               <img
                 src={instagramIcon}
                 alt="Instagram-icon"
                 className="w-5 h-5"
               />
             </a>
-            <a href="www.facebook.com" className="bg-white rounded-lg p-2 hover:bg-red-200" rel="noopener noreferrer">
-              <img
-                src={facebookIcon}
-                alt="facebook-icon"
-                className="w-5 h-5"
-              />
+            <a
+              href="www.facebook.com"
+              target="_blank"
+              className="bg-white rounded-lg p-2 hover:bg-red-200"
+              rel="noopener noreferrer"
+            >
+              <img src={facebookIcon} alt="facebook-icon" className="w-5 h-5" />
             </a>
-            <a href="www.twitter.com" className="bg-white rounded-lg p-2 hover:bg-red-200" rel="noopener noreferrer">
-              <img
-                src={twitterIcon}
-                alt="twitter-icon"
-                className="w-5 h-5"
-              />
+            <a
+              href="www.x.com"
+              target="_blank"
+              className="bg-white rounded-lg p-2 hover:bg-red-200"
+              rel="noopener noreferrer"
+            >
+              <img src={twitterIcon} alt="twitter-icon" className="w-5 h-5" />
             </a>
           </div>
         </div>
@@ -65,32 +91,50 @@ const Footer = () => {
           <hr className="border-2 border-peach-red-100 w-10" />
           <ul className="space-y-2 pt-4">
             <li>
-              <span onClick={() => handleNavigation("/our-services")} className="text-white hover:text-red-500 cursor-pointer">
+              <span
+                onClick={() => handleNavigation("/our-services")}
+                className="text-white hover:text-red-500 cursor-pointer"
+              >
                 Web Design/Development
               </span>
             </li>
             <li>
-              <span onClick={() => handleNavigation("/our-services")} className="text-white hover:text-red-500 cursor-pointer">
+              <span
+                onClick={() => handleNavigation("/our-services")}
+                className="text-white hover:text-red-500 cursor-pointer"
+              >
                 App Development
               </span>
             </li>
             <li>
-              <span onClick={() => handleNavigation("/our-services")} className="text-white hover:text-red-500 cursor-pointer">
+              <span
+                onClick={() => handleNavigation("/our-services")}
+                className="text-white hover:text-red-500 cursor-pointer"
+              >
                 UI/UX Design
               </span>
             </li>
             <li>
-              <span onClick={() => handleNavigation("/our-services")} className="text-white hover:text-red-500 cursor-pointer">
+              <span
+                onClick={() => handleNavigation("/our-services")}
+                className="text-white hover:text-red-500 cursor-pointer"
+              >
                 HubSpot Integration
               </span>
             </li>
             <li>
-              <span onClick={() => handleNavigation("/our-services")} className="text-white hover:text-red-500 cursor-pointer">
+              <span
+                onClick={() => handleNavigation("/our-services")}
+                className="text-white hover:text-red-500 cursor-pointer"
+              >
                 Email Marketing
               </span>
             </li>
             <li>
-              <span onClick={() => handleNavigation("/our-services")} className="text-white hover:text-red-500 cursor-pointer">
+              <span
+                onClick={() => handleNavigation("/our-services")}
+                className="text-white hover:text-red-500 cursor-pointer"
+              >
                 Website Migration
               </span>
             </li>
@@ -153,11 +197,16 @@ const Footer = () => {
             the readable content of a page
           </p>
           <div className="pt-4">
-            <input
-              type="email"
-              placeholder="Email"
-              className="flex-1 bg-white text-gray-700 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-peach-red-100 w-full"
-            />
+            <form onSubmit={handleSubmit}>
+              <input
+                onChange={handleChange}
+                name="email"
+                type="email"
+                placeholder="Email"
+                value={formData.email}
+                className="flex-1 bg-white text-gray-700 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-peach-red-100 w-full"
+              />
+            </form>
             <div className="flex justify-end mt-4">
               <button className="bg-peach-red-100 text-white px-4 py-2 rounded-md hover:bg-red-600 focus:outline-none">
                 Submit
